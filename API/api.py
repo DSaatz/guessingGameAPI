@@ -1,7 +1,16 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import logic.helpers as helpers
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Replace with your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/random_year")
 async def random_year():
@@ -14,7 +23,7 @@ async def movie_from_year(year: int):
 @app.get("/album_from_year/{year}")
 async def album_from_year(year: int):
     albums = helpers.albumFromYear(year)
-    return {"year": year, "albums": [album[0] for album in albums]}
+    return {"year": year, "albums": helpers.albumFromYear(year)}
 
 @app.get("/invention_from_year/{year}")
 async def invention_from_year(year: int):
