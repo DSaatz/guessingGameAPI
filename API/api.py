@@ -23,7 +23,7 @@ async def movie_from_year(year: int):
 @app.get("/album_from_year/{year}")
 async def album_from_year(year: int):
     albums = helpers.albumFromYear(year)
-    return {"year": year, "albums": helpers.albumFromYear(year)}
+    return {"album": helpers.albumFromYear(year)}
 
 @app.get("/invention_from_year/{year}")
 async def invention_from_year(year: int):
