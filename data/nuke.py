@@ -1,11 +1,18 @@
 import psycopg2
+from dotenv import load_dotenv
+import os
 
-# Connect to your database
-conn = psycopg2.connect(database="guessingGameDB",
-                        host="localhost",
-                        user="postgres",
-                        password="admin",
-                        port="5432")
+db_name = os.getenv('DB_NAME')
+db_host = os.getenv('DB_HOST')
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_port = os.getenv('DB_PORT')
+
+conn = psycopg2.connect(database=db_name,
+                        host=db_host,
+                        user=db_user,
+                        password=db_password,
+                        port=db_port)
 cur = conn.cursor()
 
 # Function to drop all tables
